@@ -28,16 +28,16 @@ class Shellsort:
             
 class BusquedaBinaria:
         
-    def busqueda (self, numeros, valorBuscado):
+    def busqueda (self, letras, valorBuscado):
         inicio=0
-        final=len(numeros)-1
+        final=len(letras)-1
         x=0
         while inicio<=final:
             puntero=(inicio+final)//2
-            if (valorBuscado==numeros[puntero]):
+            if (valorBuscado==letras[puntero]):
                 x=1
                 break
-            elif(valorBuscado>numeros[puntero]):
+            elif(valorBuscado>letras[puntero]):
                 inicio=puntero+1
             else:
                 final=puntero-1
@@ -155,9 +155,15 @@ class AlmacenarLetras:
         ss=Shellsort.ordenar(ss,letras2)
         self.setLetras(letras2)
         
-        
-        
-        
+class JuegoAhorcado:
+    
+    def obtenerLetrasDisponibles(self, letrasIngresadas):
+        bb=BusquedaBinaria()
+        letrasDisponibles=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        for i in range(0,len(letrasDisponibles)):
+            encontrado=bb.busqueda(letrasIngresadas, i)
+            if(encontrado==True):
+                letrasDisponibles[i]="-"
     
         
         
