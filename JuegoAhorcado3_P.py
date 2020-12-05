@@ -172,6 +172,9 @@ class JuegoAhorcado:
             encontrado=bb.busqueda(letrasIngresadas, i)
             if(encontrado==True):
                 letrasDisponibles[i]='-'
+        for i in letrasDisponibles:
+            print(i, end=" ")
+        print()
                 
     def cargarPalabras(self):
         return Archivo.cargarPalabras(Archivo)
@@ -238,7 +241,9 @@ class PruebaJuegoahorcado:
             elif(self.op==3):
                 a.eliminar()
             elif(self.op==4):
-                print()
+                if(a.archivoVacio(a)):
+                    a.agregarPalabras(a)
+                
             elif(self.op==5):
                 print("Gracias por haber jugado al ahorcado!")
                 break
