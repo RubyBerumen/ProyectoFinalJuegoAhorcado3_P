@@ -25,6 +25,14 @@ class Shellsort:
                         j-=int(intervalo)
             
             intervalo=int(intervalo)/2
+            
+class Oportunidades:
+    
+    def __init__(self):
+        self.intentos=10
+    
+    def descontarIntento(self):
+        self.intentos-=1
 
 class Archivo :
     
