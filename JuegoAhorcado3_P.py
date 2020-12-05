@@ -72,7 +72,12 @@ class Archivo :
             palabra=input(f"Ingresa la palabra {i+1} :")
             palabras.append(palabra)
             
-        
+        ss=Shellsort()    
+        ss=Shellsort.ordenar(ss,palabras)
+        with open("palabras.txt","a+") as f:
+            for i in palabras:
+                f.write(i+"\n")
+        print("La(s) palabra(s) ha(n) sido cargada(s)\n")
         
         
         
