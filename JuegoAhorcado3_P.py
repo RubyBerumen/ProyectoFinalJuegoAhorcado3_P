@@ -26,6 +26,23 @@ class Shellsort:
             
             intervalo=int(intervalo)/2
             
+class BusquedaBinaria:
+        
+    def busqueda (self, numeros, valorBuscado):
+        inicio=0
+        final=len(numeros)-1
+        x=0
+        while inicio<=final:
+            puntero=(inicio+final)//2
+            if (valorBuscado==numeros[puntero]):
+                x=1
+                break
+            elif(valorBuscado>numeros[puntero]):
+                inicio=puntero+1
+            else:
+                final=puntero-1
+        return x==1
+            
 class Oportunidades:
     
     def __init__(self):
