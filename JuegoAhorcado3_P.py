@@ -55,7 +55,6 @@ class Archivo :
             pass
         print("Se ha eliminado el archivo")
         
-        
     def agregarPalabras(self):
         palabras=[]
         while True:
@@ -78,6 +77,23 @@ class Archivo :
             for i in palabras:
                 f.write(i+"\n")
         print("La(s) palabra(s) ha(n) sido cargada(s)\n")
+        
+    def ordenar(self):
+        palabras=[]
+        with open("palabras.txt", "r") as f:
+            for l in f:
+                x=l.split()
+                for i in x:
+                    palabras.append(i)
+        ss=Shellsort()    
+        ss=Shellsort.ordenar(ss,palabras)
+        with open("palabras.txt", "w") as f:
+            for i in palabras:
+                f.write(i+"\n")
+    
+    
+    
+    
         
         
         
