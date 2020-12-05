@@ -6,6 +6,7 @@ Created on 4 dic. 2020
 
 import os
 import random
+from builtins import True
 
 class Shellsort:
     
@@ -134,7 +135,13 @@ class Archivo :
                     palabras.append(str(i).upper())
         print(f"{len(palabras)} palabra(s) cargada(s)")
         return palabras
-        
+    
+    def archivoVacio(self):
+        if not os.path.getsize("palabras.txt") > 0:
+            return True
+        else:
+            return False
+            
 class AlmacenarLetras:
     
     def __init__(self):
@@ -234,7 +241,7 @@ class PruebaJuegoahorcado:
             elif(self.op==3):
                 a.eliminar()
             elif(self.op==4):
-                print("")
+                print()
             elif(self.op==5):
                 print("Gracias por haber jugado al ahorcado!")
                 break
