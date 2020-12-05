@@ -30,6 +30,12 @@ class Oportunidades:
     
     def __init__(self):
         self.intentos=10
+        
+    def getIntentos(self):
+        return self.__intentos
+    
+    def setIntentos(self, intentos):
+        self.__intentos=intentos
     
     def descontarIntento(self):
         self.intentos-=1
