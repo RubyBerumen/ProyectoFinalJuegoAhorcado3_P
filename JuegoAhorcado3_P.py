@@ -204,8 +204,43 @@ class JuegoAhorcado:
             self.op.descontarIntento()
         return palabraNueva.upper()
         
-        
-        
+class PruebaJuegoahorcado:
+    
+    def munuOpciones(self):
+        def __init__(self):
+            self.op=0
+        a=Archivo()    
+        print("!Bienvenido al juego del ahorcado!\n")
+        while True:
+            print("1) Verificar archivo")
+            print("2) Llenar archivo con palabras")
+            print("3) Borrar archivo")    
+            print("4) Jugar")   
+            print("5) Salir")
+            while True:
+                try:
+                    self.op=int(input("Elige una opcion"))
+                except:
+                    print("Debes ingresar un numero")
+                else:
+                    if(self.op>0):
+                        break
+                    else:
+                        print("El numero debe de ser mayor que 0")
+            if(self.op==1):
+                a.verificar()
+            elif(self.op==2):
+                a.agregarPalabras()
+            elif(self.op==3):
+                a.eliminar()
+            elif(self.op==4):
+                print("")
+            elif(self.op==5):
+                print("Gracias por haber jugado al ahorcado!")
+                break
+            else:
+                print("Opcion Invalida!\n")
+                
         
         
         
