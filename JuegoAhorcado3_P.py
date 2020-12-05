@@ -5,6 +5,7 @@ Created on 4 dic. 2020
 '''
 
 import os
+import random
 
 class Shellsort:
     
@@ -156,6 +157,8 @@ class AlmacenarLetras:
         self.setLetras(letras2)
         
 class JuegoAhorcado:
+    def __init__(self):
+        self.contLetras=0
     
     def obtenerLetrasDisponibles(self, letrasIngresadas):
         bb=BusquedaBinaria()
@@ -168,6 +171,28 @@ class JuegoAhorcado:
     def cargarPalabras(self):
         return Archivo.cargarPalabras(Archivo)
     
+    def elegirPalabra(self,palabras):
+        num=random.randint(0,len(palabras)-1)
+        return palabras[num]
+    
+    def seAdivinoPalabra(self,palabraAleatoria,letrasIngresadas):
+        letrasAdivinadas=0
+        for i in range(0,len(palabraAleatoria)):
+            letra=palabraAleatoria[i]
+            for j in range(0,self.contLetras):
+                if(letrasIngresadas[j]==letra):
+                    letrasAdivinadas+=1
+        return letrasAdivinadas==len(palabraAleatoria)
+                   
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
