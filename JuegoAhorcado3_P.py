@@ -117,12 +117,26 @@ class Archivo :
         print(f"{len(palabras)} palabra(s) cargada(s)")
         return palabras
         
-        
-        
-        
-        
-        
-        
+class AlmacenarLetras:
+    
+    def __init__(self):
+        self.letras=[]
+                
+    def getLetras(self):
+        return self.letras
+    
+    def setLetras(self, letras):
+        self.letras=letras   
+    
+    def Agregar(self,letra):
+        letras2=[]
+        letras2.append(letra)
+        while not self.letras == []:
+            letras2.append(self.letras.pop())
+            
+        ss=Shellsort()    
+        ss=Shellsort.ordenar(ss,letras2)
+        self.setLetras(letras2)
         
         
         
