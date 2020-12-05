@@ -35,3 +35,25 @@ class Archivo :
             pass
         print("Se ha eliminado el archivo")
         
+        
+    def agregarPalabras(self):
+        palabras=[]
+        while True:
+            try:
+                numPalabras=int(input("¿Cuantas palabras deseas ingresar?"))
+            except:
+                print("Debes ingresar un numero")
+            else:
+                if numPalabras>0:
+                    break
+                else:
+                    print("El numero debe ser mayor que 0!")
+        for i in range(numPalabras):
+            palabra=input(f"Ingresa la palabra {i+1} :")
+            palabras.append(palabra)
+            
+        
+        
+        
+        
+        
