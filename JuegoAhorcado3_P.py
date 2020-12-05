@@ -91,8 +91,28 @@ class Archivo :
             for i in palabras:
                 f.write(i+"\n")
     
-    
-    
+    def cargarPalabras(self):
+        print("Cargando lista de palabras desde el archivo...")
+        self.ordenar(Archivo)
+        palabras=[]
+        with open("palabras.txt", "r") as f:
+            for l in f:
+                x = l.split()
+                for i in x:
+                    palabras.append(str(i).upper())
+        print(f"{len(palabras)} palabra(s) cargada(s)")
+        return palabras
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
         
         
