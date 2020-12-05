@@ -158,6 +158,7 @@ class AlmacenarLetras:
         
 class JuegoAhorcado:
     def __init__(self):
+        self.op=Oportunidades()
         self.contLetras=0
     
     def obtenerLetrasDisponibles(self, letrasIngresadas):
@@ -166,7 +167,7 @@ class JuegoAhorcado:
         for i in range(0,len(letrasDisponibles)):
             encontrado=bb.busqueda(letrasIngresadas, i)
             if(encontrado==True):
-                letrasDisponibles[i]="-"
+                letrasDisponibles[i]='-'
                 
     def cargarPalabras(self):
         return Archivo.cargarPalabras(Archivo)
@@ -183,7 +184,25 @@ class JuegoAhorcado:
                 if(letrasIngresadas[j]==letra):
                     letrasAdivinadas+=1
         return letrasAdivinadas==len(palabraAleatoria)
-                   
+    
+    def obtenerPalabraAdivinada(self,palabraAleatoria,letrasIngresadas):
+        palabraSecreta=[]
+        for i in range(0,len(palabraSecreta)):
+            palabraSecreta[i]="_"
+        for i in range(0,len(palabraAleatoria)):
+            letra=palabraAleatoria[i]
+            for j in range(0,self.contLetras):
+                if(letrasIngresadas[j]==letra):
+                    palabraSecreta[i]=letra
+        palabraNueva=""
+        for i in range(0,len(palabraSecreta)):
+            palabraNueva+=palabraSecreta[i]+str(" ")
+        if (palabraAleatoria.find(letrasIngresadas[self.contLetras])):
+            print("Bien hecho: ")
+        else:
+            print("Oops! Esa letra no está en la palabra secreta: ")
+            self.op.descontarIntento()
+        return palabraNueva.upper()
         
         
         
