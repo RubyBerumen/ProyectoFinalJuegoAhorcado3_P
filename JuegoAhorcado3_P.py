@@ -164,6 +164,9 @@ class JuegoAhorcado:
             encontrado=bb.busqueda(letrasIngresadas, i)
             if(encontrado==True):
                 letrasDisponibles[i]="-"
+                
+    def cargarPalabras(self):
+        return Archivo.cargarPalabras(Archivo)
     
         
         
