@@ -6,6 +6,26 @@ Created on 4 dic. 2020
 
 import os
 
+class Shellsort:
+    
+    def ordenar(self,palabras):
+        intervalo = len(palabras)/2
+        intervalo = int(intervalo)
+        while(intervalo>0):
+            for i in range(int(intervalo),len(palabras)):
+                j=i-int(intervalo)
+                while(j>=0):
+                    k=j+int(intervalo)
+                    if(palabras[j] <= palabras[k]):
+                        j-=1
+                    else:
+                        aux=palabras[j]
+                        palabras[j]=palabras[k]
+                        palabras[k]=aux
+                        j-=int(intervalo)
+            
+            intervalo=int(intervalo)/2
+
 class Archivo :
     
     def verificar(self):
