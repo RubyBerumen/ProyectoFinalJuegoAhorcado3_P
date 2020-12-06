@@ -217,6 +217,13 @@ class JuegoAhorcado:
             self.op.descontarIntento()
         return palabraNueva.upper()
     
+    def inicioAhorcado(self, palabraAleatoria):
+        ja=JuegoAhorcado()
+        print("¡Bienvenido al juego del Ahorcado!\n")
+        print(f"Estoy pensando en una palabra de {len(palabraAleatoria)} letras")
+        print("-----------------------------------------\n")
+        ja.ingresarLetra()
+        
     def ingresarLetra(self):
         pja=PruebaJuegoahorcado()
         ja=JuegoAhorcado()
