@@ -137,10 +137,6 @@ class Archivo :
     
     def archivoVacio(self):
         return(not os.path.getsize("palabras.txt") > 0)
-        '''if not os.path.getsize("palabras.txt") > 0:
-            return True
-        else:
-            return False'''
             
 class AlmacenarLetras:
     
@@ -171,7 +167,17 @@ class JuegoAhorcado:
         self.palabraAleatoria=None
         self.letrasAdivinadas=None
         self.contLetras=0
+        self.op=Oportunidades()
         
+    def inicioAhorcado(self, palabraAleatoria):
+        self.palabraAleatoria=palabraAleatoria
+        ja=JuegoAhorcado()
+        print("Bienvenido al juego del Ahorcado\n")
+        print(f"Estoy pensando en una palabra de {len(palabraAleatoria)} letras")
+        print("-----------------------------------------\n")
+        
+    def ingresarLetra(self):
+
     
     def obtenerLetrasDisponibles(self, li):
         letrasIngresadas=li.getLetras()
@@ -227,54 +233,7 @@ class JuegoAhorcado:
             palabraNueva+=palabraSecreta[i]+str(" ")
         return palabraNueva.upper()
     
-    def inicioAhorcado(self, palabraAleatoria):
-        self.palabraAleatoria=palabraAleatoria
-        ja=JuegoAhorcado()
-        print("Bienvenido al juego del Ahorcado\n")
-        print(f"Estoy pensando en una palabra de {len(palabraAleatoria)} letras")
-        print("-----------------------------------------\n")
-        ja.ingresarLetra(ja,palabraAleatoria)
-        
-    def ingresarLetra(self,ja,palabraAleatoria):
-        pja=PruebaJuegoahorcado()
-        op=Oportunidades()
-        print(f"Tienes {op.intentos} oportunidades")
-        print("Letras disponibles: ",end="")
-        JuegoAhorcado.obtenerLetrasDisponibles(JuegoAhorcado, ja.letrasIngresadas)
-        print("Por favor ingresa una letra: ")
-        caracter=''
-        while True:
-            caracter = str(input()).lower()
-            if (len(caracter)==1):
-                x=ord(caracter[0])
-                if(x>93 and x<123):
-                    ja.letra=caracter.upper()
-                    ja.letrasIngresadas.Agregar(ja.letra)
-                    for i in range(ja.contLetras):
-                        if(ja.letrasIngresadas.getLetras()[i]==ja.letra):
-                            print("Oops! Ya habias ingresado esa letra")
-                            print("--------------------------------")
-                            JuegoAhorcado.ingresarLetra(JuegoAhorcado,ja,palabraAleatoria)
-                    print(ja.obtenerPalabraAdivinada(palabraAleatoria, ja.letrasIngresadas, op))
-                    print("--------------------------------")
-                    ja.contLetras+=1
-                else:
-                    print("Caracter invalido!\n")
-                    print("--------------------------------")
-                    ja.ingresarLetra(ja)
-            else:
-                print("Debes ingresar una letra:")
-        if(JuegoAhorcado.seAdivinoPalabra(ja, ja.palabraAleatoria, ja.letrasIngresadas)):
-            print("Felicidades, has ganado!\n")
-            pja.munuOpciones(pja)
-        else:
-            if(op.getIntentos()>0):
-                ja.ingresarLetra()
-            else:
-                print("Lo siento, te has quedado sin oportunidades para adivinar.")
-                print("NO HAS ADIVINADO LA PALABRA.")
-                print(f"La palabra secreta era: {self.palabraAleatoria.upper}")
-                pja.munuOpciones()
+
                 
 class PruebaJuegoahorcado:
     
