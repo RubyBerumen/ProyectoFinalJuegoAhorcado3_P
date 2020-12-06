@@ -248,14 +248,21 @@ class JuegoAhorcado:
         self.palabraAleatoria=palabras[num]
         return self.palabraAleatoria
     
-    def seAdivinoPalabra(self,palabraAleatoria,letrasIngresadas):
-        self.letrasAdivinadas=0
-        for i in range(len(palabraAleatoria)):
-            letra=palabraAleatoria[i]
-            for j in range(self.contLetras):
-                if(letrasIngresadas[j]==letra):
-                    self.letrasAdivinadas+=1
-        return self.letrasAdivinadas==len(palabraAleatoria)
+    def seAdivinoPalabra(self,palabraSecreta,letrasIngresadas):
+        letras=letrasIngresadas.getLetras()
+        palabraSecreta=palabraSecreta.replace(" ","")
+        letras=self.ordenLetarsingresadas(letras)
+        tamaño=len(palabraSecreta)
+        num=0
+        if len(palabraSecreta)>0:
+            for i in range(0,len(palabraSecreta)):
+                x=palabraSecreta[i]
+                for j in range(len(letras)):
+                    if x==letras[x]:
+                        num=num+1
+        else:
+            return False
+        return num==tamaño
     
     def obtenerPalabraAdivinada(self,palabraAleatoria,pila,op):
         letrasIngresadas=pila.getLetras()
