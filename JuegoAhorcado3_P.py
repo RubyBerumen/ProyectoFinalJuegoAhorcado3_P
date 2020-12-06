@@ -77,7 +77,7 @@ class Archivo :
                 for l in f:
                     if l != "\n":
                         lineas+=1
-                print(f"El archivo contiene {lineas} palabras\n")
+                print(f"El archivo contiene {lineas} palabra(s)\n")
     
     def eliminar(self):
         if os.path.isfile("palabras.txt"):
@@ -168,6 +168,7 @@ class JuegoAhorcado:
         self.letrasAdivinadas=None
         self.contLetras=0
         self.op=Oportunidades()
+        self.bb=BusquedaBinaria()
         
     def inicioAhorcado(self, palabraAleatoria):
         self.palabraAleatoria=palabraAleatoria
@@ -175,21 +176,69 @@ class JuegoAhorcado:
         print("Bienvenido al juego del Ahorcado\n")
         print(f"Estoy pensando en una palabra de {len(palabraAleatoria)} letras")
         print("-----------------------------------------\n")
+        self.ingresarLetra(ja,palabraAleatoria)
         
-    def ingresarLetra(self):
-
+    def ingresarLetra(self,ja,palabraAleatoria):
+        pja=PruebaJuegoahorcado()
+        
+        print(f"Tienes {ja.op.getIntentos()} oportunidades")
+        print(f"Letras disponibles: {ja.obtenerLetrasDisponibles(ja.letrasIngresadas)}")
+        print("Por favor ingresa una letra: ")
+        caracter=''
+        while True:
+            caracter = str(input()).lower()
+            if (len(caracter)==1):
+                x=ord(caracter[0])
+                if(x>93 and x<123):
+                    ja.letra=caracter.upper()
+                    ja.letrasIngresadas.Agregar(ja.letra)
+                    for i in range(ja.contLetras):
+                        if(ja.letrasIngresadas.getLetras()[i]==ja.letra):
+                            print("Oops! Ya habias ingresado esa letra")
+                            print("--------------------------------")
+                            self.ingresarLetra(ja,palabraAleatoria)
+                    print(ja.obtenerPalabraAdivinada(palabraAleatoria, ja.letrasIngresadas, ja.op))
+                    print("--------------------------------")
+                    ja.contLetras+=1
+                else:
+                    print("Caracter invalido!\n")
+                    print("--------------------------------")
+                    self.ingresarLetra(ja,palabraAleatoria)
+            else:
+                print("Debes ingresar una letra:")
+        if(ja.seAdivinoPalabra(ja, ja.palabraAleatoria, ja.letrasIngresadas)):
+            print("Felicidades, has ganado!\n")
+            pja.munuOpciones(pja)
+        else:
+            if(ja.op.getIntentos()>0):
+                self.ingresarLetra(ja,palabraAleatoria)
+            else:
+                print("Lo siento, te has quedado sin oportunidades para adivinar.")
+                print("NO HAS ADIVINADO LA PALABRA.")
+                print(f"La palabra secreta era: {self.palabraAleatoria.upper}")
+                pja.munuOpciones()
+            
     
     def obtenerLetrasDisponibles(self, li):
         letrasIngresadas=li.getLetras()
-        bb=BusquedaBinaria()
-        letrasDisponibles=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        letrasDisponibles='abcdefghijklmnopqrstuvwxyz'
+        aux=[]
         for i in range(len(letrasDisponibles)):
-            encontrado=bb.busqueda(letrasIngresadas, letrasDisponibles[i])
-            if(encontrado==True):
-                letrasDisponibles[i]='-'
-        for i in letrasDisponibles:
-            print(i, end=" ")
-        print()
+            aux.append(ord(letrasDisponibles[i]))
+        if(len(letrasIngresadas)>0):
+            for i in range(len(aux)):
+                x=aux[i]
+                for j in range(len(letrasIngresadas)):
+                    if(x==letrasIngresadas[j]):
+                        aux[i]=32
+        letrasDisponibles=''
+        for i in range(len(aux)):
+            if(aux[i]==32):
+                letrasDisponibles=letrasDisponibles+"-"
+            else:
+                letrasDisponibles=letrasDisponibles+chr(aux[i])
+        
+        return letrasDisponibles
                 
     def cargarPalabras(self):
         return Archivo.cargarPalabras(Archivo)
@@ -219,6 +268,10 @@ class JuegoAhorcado:
             for j in range(self.contLetras):
                 if(letrasIngresadas[j]==letra):
                     palabraSecreta[i]=letra
+                    
+        palabraNueva=""
+        for i in range(len(palabraSecreta)):
+            palabraNueva+=palabraSecreta[i]+str(" ")
         x=0
         for i in range (len(palabraAleatoria)):
             if(palabraAleatoria[i]==letrasIngresadas[self.contLetras]):
@@ -228,12 +281,8 @@ class JuegoAhorcado:
         else:
             print("Oops! Esa letra no esta en la palabra secreta: ")
             op.descontarIntento()
-        palabraNueva=""
-        for i in range(len(palabraSecreta)):
-            palabraNueva+=palabraSecreta[i]+str(" ")
+        
         return palabraNueva.upper()
-    
-
                 
 class PruebaJuegoahorcado:
     
