@@ -296,15 +296,20 @@ class PruebaJuegoahorcado:
                 a.eliminar()
             elif(self.op==4):
                 if(a.archivoVacio(a)):
+                    print("El archivo se encuentra vacio!")
+                    print("Por favor ingresa palabras...\n")
                     a.agregarPalabras(a)
-                
+                else:
+                    ja=JuegoAhorcado()
+                    ja.inicioAhorcado(ja.elegirPalabra(ja.cargarPalabras()))
             elif(self.op==5):
                 print("Gracias por haber jugado al ahorcado!")
                 break
             else:
                 print("Opcion Invalida!\n")
                 
-        
+pja=PruebaJuegoahorcado()
+pja.munuOpciones()       
         
         
         
