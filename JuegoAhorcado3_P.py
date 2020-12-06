@@ -148,16 +148,44 @@ class AlmacenarLetras:
     
     def setLetras(self, letras):
         self.letras=letras   
+        
+    def quitar(self):
+        if(self.getLetras()==[]):
+            return ' '
+        else:
+            return self.letras.pop(0)
     
-    def Agregar(self,letra):
+    def agregar(self,letra):
         letras2=[]
         letras2.append(letra)
         while not self.letras == []:
             letras2.append(self.letras.pop())
-            
-        ss=Shellsort()    
-        ss=Shellsort.ordenar(ss,letras2)
+        x=0
+        for i in range(1,len(letras2)):
+            x=letras2[i]
+            j=(i-1)
+            while(j>=0 and letras2[j]>x):
+                letras2[j+1]=letras2[j]
+                letras2[j]=x    
+                j-=1
         self.setLetras(letras2)
+        
+        def obtenerPalabraAdivinada(self,palabraSecreta):
+            letras2=[]
+            for i in palabraSecreta:
+                x=0
+                while not self.letras == []:
+                    l=self.quitar()
+                    letras2.append(l)
+                    if (l==i):
+                        x=1
+                        print(i,end=" ")
+                        break
+                while not letras2 == []:
+                    self.agregar(letras2.pop(0))
+                if (x==0):
+                    print("_",end=" ")    
+        print("\n")
         
 class JuegoAhorcado:
     def __init__(self):
@@ -175,6 +203,7 @@ class JuegoAhorcado:
         ja=JuegoAhorcado()
         print("Bienvenido al juego del Ahorcado\n")
         print(f"Estoy pensando en una palabra de {len(palabraAleatoria)} letras")
+        print(palabraAleatoria)
         print("-----------------------------------------\n")
         self.ingresarLetra(ja,palabraAleatoria)
         
@@ -191,7 +220,7 @@ class JuegoAhorcado:
                 x=ord(caracter[0])
                 if(x>93 and x<123):
                     ja.letra=caracter.upper()
-                    ja.letrasIngresadas.Agregar(ja.letra)
+                    ja.letrasIngresadas.agregar(ja.letra)
                     for i in range(ja.contLetras):
                         if(ja.letrasIngresadas.getLetras()[i]==ja.letra):
                             print("Oops! Ya habias ingresado esa letra")
@@ -252,7 +281,7 @@ class JuegoAhorcado:
         letras=letrasIngresadas.getLetras()
         palabraSecreta=palabraSecreta.replace(" ","")
         letras=self.ordenLetarsingresadas(letras)
-        tamaño=len(palabraSecreta)
+        tamano=len(palabraSecreta)
         num=0
         if len(palabraSecreta)>0:
             for i in range(0,len(palabraSecreta)):
@@ -262,34 +291,7 @@ class JuegoAhorcado:
                         num=num+1
         else:
             return False
-        return num==tamaño
-    
-    def obtenerPalabraAdivinada(self,palabraAleatoria,pila,op):
-        letrasIngresadas=pila.getLetras()
-        palabraSecreta=[]
-        palabraAleatoria=palabraAleatoria.upper()
-        for i in range(len(palabraAleatoria)):
-            palabraSecreta.append('_')
-        for i in range(len(palabraAleatoria)):
-            letra=palabraAleatoria[i]
-            for j in range(self.contLetras):
-                if(letrasIngresadas[j]==letra):
-                    palabraSecreta[i]=letra
-                    
-        palabraNueva=""
-        for i in range(len(palabraSecreta)):
-            palabraNueva+=palabraSecreta[i]+str(" ")
-        x=0
-        for i in range (len(palabraAleatoria)):
-            if(palabraAleatoria[i]==letrasIngresadas[self.contLetras]):
-                x+=1
-        if (x>0):
-            print("Bien hecho: ")
-        else:
-            print("Oops! Esa letra no esta en la palabra secreta: ")
-            op.descontarIntento()
-        
-        return palabraNueva.upper()
+        return num==tamano
                 
 class PruebaJuegoahorcado:
     
