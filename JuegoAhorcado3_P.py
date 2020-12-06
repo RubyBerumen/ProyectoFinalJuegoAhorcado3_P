@@ -163,8 +163,13 @@ class AlmacenarLetras:
 class JuegoAhorcado:
     def __init__(self):
         self.op=Oportunidades()
-        self.contLetras=0
-    
+        self.letra=None
+        self.letrasIngresadas=None
+        self.palabraSecreta=None
+        self.palabraAleatoria=None
+        self.letrasAdivinadas=None
+        self.contLetras=None
+        
     def obtenerLetrasDisponibles(self, letrasIngresadas):
         bb=BusquedaBinaria()
         letrasDisponibles=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -181,16 +186,17 @@ class JuegoAhorcado:
     
     def elegirPalabra(self,palabras):
         num=random.randint(0,len(palabras)-1)
-        return palabras[num]
+        self.palabraAleatoria=palabras[num]
+        return self.palabraAleatoria
     
     def seAdivinoPalabra(self,palabraAleatoria,letrasIngresadas):
-        letrasAdivinadas=0
+        self.letrasAdivinadas=0
         for i in range(0,len(palabraAleatoria)):
             letra=palabraAleatoria[i]
             for j in range(0,self.contLetras):
                 if(letrasIngresadas[j]==letra):
-                    letrasAdivinadas+=1
-        return letrasAdivinadas==len(palabraAleatoria)
+                    self.letrasAdivinadas+=1
+        return self.letrasAdivinadas==len(palabraAleatoria)
     
     def obtenerPalabraAdivinada(self,palabraAleatoria,letrasIngresadas):
         palabraSecreta=[]
@@ -215,7 +221,7 @@ class PruebaJuegoahorcado:
     
     def munuOpciones(self):
         def __init__(self):
-            self.op=0
+            self.__op=0
         a=Archivo()    
         print("!Bienvenido al juego del ahorcado!\n")
         while True:
