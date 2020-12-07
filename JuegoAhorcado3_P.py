@@ -170,21 +170,21 @@ class AlmacenarLetras:
                 j-=1
         self.setLetras(letras2)
         
-        def obtenerPalabraAdivinada(self,palabraSecreta):
-            letras2=[]
-            for i in palabraSecreta:
-                x=0
-                while not self.letras == []:
-                    l=self.quitar()
-                    letras2.append(l)
-                    if (l==i):
-                        x=1
-                        print(i,end=" ")
-                        break
-                while not letras2 == []:
-                    self.agregar(letras2.pop(0))
-                if (x==0):
-                    print("_",end=" ")    
+    def obtenerPalabraAdivinada(self,palabraSecreta):
+        letras2=[]
+        for i in palabraSecreta:
+            x=0
+            while not self.letras == []:
+                l=self.quitar()
+                letras2.append(l)
+                if (l==i):
+                    x=1
+                    print(i,end=" ")
+                    break
+            while not letras2 == []:
+                self.agregar(letras2.pop(0))
+            if (x==0):
+                print("_",end=" ")    
         print("\n")
         
 class JuegoAhorcado:
@@ -201,6 +201,7 @@ class JuegoAhorcado:
     def inicioAhorcado(self, palabraSecreta):
         ja=JuegoAhorcado()
         letrasIngresadas=AlmacenarLetras()
+        bb=BusquedaBinaria()
         print("Bienvenido al juego del Ahorcado\n")
         print(f"Estoy pensando en una palabra de {len(palabraSecreta)} letras")
         print(palabraSecreta)
@@ -209,9 +210,34 @@ class JuegoAhorcado:
         while(self.op.getIntentos()>0 and (not self.seAdivinoPalabra(palabraSecreta, letrasIngresadas))):
             print(f"Te quedan {self.op.getIntentos()} oportunidades")
             print("Letras disponibles: " + self.obtenerLetrasDisponibles(letrasIngresadas))
-            print("Por favor ingresa una letra")
-
-            
+            print("Por favor ingresa una letra:")
+            caracter = ''
+            while True:
+                caracter = str(input()).lower()
+                if len(caracter)==1:
+                    x=ord(caracter[0])
+                    if 93<x and x<123:
+                        break
+                    else:
+                        print("Caracter invalido!\n")
+                else:
+                    print("Debes ingresar una letra:")
+            letra=caracter
+            if(bb.busqueda(self.obtenerLetrasDisponibles(letrasIngresadas), letra)):
+                letrasIngresadas.agregar(letra)
+                if(letra in palabraSecreta.lower()):
+                    print("Bien hecho: ",end="")
+                else:
+                    self.op.descontarIntento()
+            else:
+                print("Oops! Ya habias ingresado esa letra")
+            letrasIngresadas.obtenerPalabraAdivinada(palabraSecreta.lower())
+        if(self.seAdivinoPalabra(palabraSecreta, letrasIngresadas)):
+            print("Felicidades, has ganado!\n")  
+        else:   
+            print("Lo siento, te has quedado sin oportunidades para adivinar.")
+            print("NO HAS ADIVINADO LA PALABRA.")
+            print(f"La palabra secreta era: {self.palabraAleatoria.upper()}")
     
     def obtenerLetrasDisponibles(self, li):
         letrasIngresadas=li.getLetras()
