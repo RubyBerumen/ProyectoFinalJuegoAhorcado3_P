@@ -194,7 +194,6 @@ class JuegoAhorcado:
         self.bb=BusquedaBinaria()
         
     def inicioAhorcado(self, palabraSecreta):
-        ja=JuegoAhorcado()
         letrasIngresadas=AlmacenarLetras()
         bb=BusquedaBinaria()
         print("Bienvenido al juego del Ahorcado\n")
@@ -225,36 +224,25 @@ class JuegoAhorcado:
                     print("Bien hecho: ",end="")
                 else:
                     self.op.descontarIntento()
-                    print("Oops! Esa letra no esta en la palabra secreta:")
+                    print("Oops! Esa letra no esta en la palabra secreta: ",end="")
             else:
+                self.op.descontarIntento()
                 print("Oops! Ya habias ingresado esa letra")
             letrasIngresadas.obtenerPalabraAdivinada(palabraSecreta.lower())
         if(self.seAdivinoPalabra(palabraSecreta, letrasIngresadas)):
-            print("Felicidades, has ganado!\n")  
+            print("Felicidades, has ganado!\n\n")  
         else:   
             print("Lo siento, te has quedado sin oportunidades para adivinar.")
             print("NO HAS ADIVINADO LA PALABRA.")
-            print(f"La palabra secreta era: {palabraSecreta.upper()}")
+            print(f"La palabra secreta era: {palabraSecreta.upper()}\n\n")
     
     def obtenerLetrasDisponibles(self, li):
+        bb=BusquedaBinaria()
         letrasIngresadas=li.getLetras()
         letrasDisponibles='abcdefghijklmnopqrstuvwxyz'
-        aux=[]
-        for i in range(len(letrasDisponibles)):
-            aux.append(ord(letrasDisponibles[i]))
-        if(len(letrasIngresadas)>0):
-            for i in range(len(aux)):
-                x=aux[i]
-                for j in range(len(letrasIngresadas)):
-                    if(x==letrasIngresadas[j]):
-                        aux[i]=32
-        letrasDisponibles=''
-        for i in range(len(aux)):
-            if(aux[i]==32):
-                letrasDisponibles=letrasDisponibles+"-"
-            else:
-                letrasDisponibles=letrasDisponibles+chr(aux[i])
-        
+        for i in range(len(letrasIngresadas)):
+            if bb.busqueda(letrasDisponibles, letrasIngresadas[i]):
+                letrasDisponibles=letrasDisponibles.replace(letrasIngresadas[i], '-')
         return letrasDisponibles
                 
     def cargarPalabras(self):
