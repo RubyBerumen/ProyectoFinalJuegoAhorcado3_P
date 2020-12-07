@@ -198,54 +198,19 @@ class JuegoAhorcado:
         self.op=Oportunidades()
         self.bb=BusquedaBinaria()
         
-    def inicioAhorcado(self, palabraAleatoria):
-        self.palabraAleatoria=palabraAleatoria
+    def inicioAhorcado(self, palabraSecreta):
         ja=JuegoAhorcado()
+        letrasIngresadas=AlmacenarLetras()
         print("Bienvenido al juego del Ahorcado\n")
-        print(f"Estoy pensando en una palabra de {len(palabraAleatoria)} letras")
-        print(palabraAleatoria)
+        print(f"Estoy pensando en una palabra de {len(palabraSecreta)} letras")
+        print(palabraSecreta)
         print("-----------------------------------------\n")
-        self.ingresarLetra(ja,palabraAleatoria)
         
-    def ingresarLetra(self,ja,palabraAleatoria):
-        pja=PruebaJuegoahorcado()
-        
-        print(f"Tienes {ja.op.getIntentos()} oportunidades")
-        print(f"Letras disponibles: {ja.obtenerLetrasDisponibles(ja.letrasIngresadas)}")
-        print("Por favor ingresa una letra: ")
-        caracter=''
-        while True:
-            caracter = str(input()).lower()
-            if (len(caracter)==1):
-                x=ord(caracter[0])
-                if(x>93 and x<123):
-                    ja.letra=caracter.upper()
-                    ja.letrasIngresadas.agregar(ja.letra)
-                    for i in range(ja.contLetras):
-                        if(ja.letrasIngresadas.getLetras()[i]==ja.letra):
-                            print("Oops! Ya habias ingresado esa letra")
-                            print("--------------------------------")
-                            self.ingresarLetra(ja,palabraAleatoria)
-                    print(ja.obtenerPalabraAdivinada(palabraAleatoria, ja.letrasIngresadas, ja.op))
-                    print("--------------------------------")
-                    ja.contLetras+=1
-                else:
-                    print("Caracter invalido!\n")
-                    print("--------------------------------")
-                    self.ingresarLetra(ja,palabraAleatoria)
-            else:
-                print("Debes ingresar una letra:")
-        if(ja.seAdivinoPalabra(ja, ja.palabraAleatoria, ja.letrasIngresadas)):
-            print("Felicidades, has ganado!\n")
-            pja.munuOpciones(pja)
-        else:
-            if(ja.op.getIntentos()>0):
-                self.ingresarLetra(ja,palabraAleatoria)
-            else:
-                print("Lo siento, te has quedado sin oportunidades para adivinar.")
-                print("NO HAS ADIVINADO LA PALABRA.")
-                print(f"La palabra secreta era: {self.palabraAleatoria.upper}")
-                pja.munuOpciones()
+        while(self.op.getIntentos()>0 and (not self.seAdivinoPalabra(palabraSecreta, letrasIngresadas))):
+            print(f"Te quedan {self.op.getIntentos()} oportunidades")
+            print("Letras disponibles: " + self.obtenerLetrasDisponibles(letrasIngresadas))
+            print("Por favor ingresa una letra")
+
             
     
     def obtenerLetrasDisponibles(self, li):
@@ -274,24 +239,24 @@ class JuegoAhorcado:
     
     def elegirPalabra(self,palabras):
         num=random.randint(0,(len(palabras))-1)
-        self.palabraAleatoria=palabras[num]
-        return self.palabraAleatoria
+        return palabras[num]
     
     def seAdivinoPalabra(self,palabraSecreta,letrasIngresadas):
-        letras=letrasIngresadas.getLetras()
-        palabraSecreta=palabraSecreta.replace(" ","")
-        letras=self.ordenLetarsingresadas(letras)
-        tamano=len(palabraSecreta)
-        num=0
-        if len(palabraSecreta)>0:
-            for i in range(0,len(palabraSecreta)):
-                x=palabraSecreta[i]
-                for j in range(len(letras)):
-                    if x==letras[x]:
-                        num=num+1
-        else:
-            return False
-        return num==tamano
+        x=1
+        palabraSecreta=palabraSecreta.lower()
+        letras=[]
+        for i in(palabraSecreta):
+            aux=0
+            while(not letrasIngresadas.getLetras()==[]):
+                letra = letrasIngresadas.quitar()
+                letras.append(letra)
+                if(letra==i):
+                    aux=1
+                    break
+            while(not letras==[]):
+                letrasIngresadas == []
+            x*=aux 
+        return x==1
                 
 class PruebaJuegoahorcado:
     
