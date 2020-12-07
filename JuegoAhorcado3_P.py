@@ -302,9 +302,7 @@ class PruebaJuegoahorcado:
             elif(self.op==3):
                 a.eliminar()
             elif(self.op==4):
-                if(a.archivoVacio()):
-                    print("El archivo se encuentra vacio!")
-                    print("Por favor ingresa palabras...\n")
+                if(a.verificar()):
                     a.agregarPalabras()
                 else:
                     ja=JuegoAhorcado()
