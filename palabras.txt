@@ -1,5 +1,2 @@
-cacahuate
-casa
-chapulin
+pato
 perro
-queso

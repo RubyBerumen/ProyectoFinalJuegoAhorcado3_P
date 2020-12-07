@@ -29,12 +29,16 @@ class Shellsort:
             
 class BusquedaBinaria:
         
-    def busqueda (self, letras, valorBuscado):
+    def busqueda (self, letras1, valorBuscado):
+        letras=[]
+        for i in letras1:
+            if(i!='-'):
+                letras.append(i)
         inicio=0
         final=len(letras)-1
         x=0
         while inicio<=final:
-            puntero=(inicio+final)//2
+            puntero=int((inicio+final)/2)
             if (valorBuscado==letras[puntero]):
                 x=1
                 break
@@ -132,7 +136,7 @@ class Archivo :
                 x = l.split()
                 for i in x:
                     palabras.append(str(i).upper())
-        print(f"{len(palabras)} palabra(s) cargada(s)")
+        print(f"{len(palabras)} palabra(s) cargada(s)\n")
         return palabras
     
     def archivoVacio(self):
@@ -204,10 +208,10 @@ class JuegoAhorcado:
         while(self.op.getIntentos()>0 and (not self.seAdivinoPalabra(palabraSecreta, letrasIngresadas))):
             print(f"Te quedan {self.op.getIntentos()} oportunidades")
             print("Letras disponibles: " + self.obtenerLetrasDisponibles(letrasIngresadas))
-            print("Por favor ingresa una letra:")
+            #print("Por favor ingresa una letra:")
             caracter = ''
             while True:
-                caracter = str(input()).lower()
+                caracter = str(input("Por favor ingresa una letra:")).lower()
                 if len(caracter)==1:
                     x=ord(caracter[0])
                     if 93<x and x<123:
@@ -226,7 +230,6 @@ class JuegoAhorcado:
                     self.op.descontarIntento()
                     print("Oops! Esa letra no esta en la palabra secreta: ",end="")
             else:
-                self.op.descontarIntento()
                 print("Oops! Ya habias ingresado esa letra")
             letrasIngresadas.obtenerPalabraAdivinada(palabraSecreta.lower())
         if(self.seAdivinoPalabra(palabraSecreta, letrasIngresadas)):
