@@ -189,12 +189,7 @@ class AlmacenarLetras:
         
 class JuegoAhorcado:
     def __init__(self):
-        self.letra=None
         self.letrasIngresadas=AlmacenarLetras()
-        self.palabraSecreta=None
-        self.palabraAleatoria=None
-        self.letrasAdivinadas=None
-        self.contLetras=0
         self.op=Oportunidades()
         self.bb=BusquedaBinaria()
         
@@ -226,9 +221,11 @@ class JuegoAhorcado:
             if(bb.busqueda(self.obtenerLetrasDisponibles(letrasIngresadas), letra)):
                 letrasIngresadas.agregar(letra)
                 if(letra in palabraSecreta.lower()):
+                    print(f"Letras disponibles {self.obtenerLetrasDisponibles(letrasIngresadas)}")
                     print("Bien hecho: ",end="")
                 else:
                     self.op.descontarIntento()
+                    print("Oops! Esa letra no esta en la palabra secreta:")
             else:
                 print("Oops! Ya habias ingresado esa letra")
             letrasIngresadas.obtenerPalabraAdivinada(palabraSecreta.lower())
@@ -237,7 +234,7 @@ class JuegoAhorcado:
         else:   
             print("Lo siento, te has quedado sin oportunidades para adivinar.")
             print("NO HAS ADIVINADO LA PALABRA.")
-            print(f"La palabra secreta era: {self.palabraAleatoria.upper()}")
+            print(f"La palabra secreta era: {palabraSecreta.upper()}")
     
     def obtenerLetrasDisponibles(self, li):
         letrasIngresadas=li.getLetras()
@@ -280,7 +277,7 @@ class JuegoAhorcado:
                     aux=1
                     break
             while(not letras==[]):
-                letrasIngresadas == []
+                letrasIngresadas.agregar(letras.pop(0))
             x*=aux 
         return x==1
                 

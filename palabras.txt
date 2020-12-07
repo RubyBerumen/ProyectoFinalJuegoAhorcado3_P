@@ -1,2 +1,5 @@
 casa
 perro
+cacahuate
+chapulin
+queso
